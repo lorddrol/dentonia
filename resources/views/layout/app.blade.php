@@ -110,10 +110,10 @@
                     <span class="model-agreement">Используя этот сайт, вы автоматически создаете или используете
                         имеющуюся учетную запись на dentonia, соглашаетесь на обработку персональных данных и принимаете
                         условия <a class="model-agreement-a" href="">Пользовательских соглашений Dentonia</a>
-                        <a class="model-agreement-a" type="button"
-                            onclick="allModelAgreement(this)">Подробнее</a><span name="hiden-modal-footer-bla-bla"
+                        <span class="model-agreement-a" type="button"
+                            onclick="allModelAgreement(this)">Подробнее</span><span name="hiden-modal-footer-bla-bla"
                             class="model-agreement d-none">, <a class="model-agreement-a" href="">Политикой
-                                конфиденциальности Dentonia</a>, даете согласие на сбор и обработку данных в
+                            конфиденциальности Dentonia</a>, даете согласие на сбор и обработку данных в
                             соответствии с ними, в т.ч. с применением cookie файлов, средств анализа поведения
                             пользователей, с привлечением сторонних сервисов, соглашаетесь на получение
                             рекламно-информационных материалов от Dentonia.</span></span>

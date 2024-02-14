@@ -29,16 +29,20 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-6 mt-4">
                     <h3>{{$p->name}}</h3>
-                    <h5 class="mt-5">{{$p->price}}</h5>
+                    <h5 class="mt-3">{{$p->price}}</h5>
                     <div class="d-flex">
                             <button type="button" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
                             <button type="button" class="btn btn-lg btn-primary mt-2">купить сейчас</button>
                     </div>
-                    <h5 style="font-weight:300;" class="mt-5">{{$p->discription}}</h5>
+                    <h5 style="font-weight:300;" class="mt-3">{{$p->discription}}</h5>
                 </div>
             </div>
         </div>
     </section>
-
-
+    <section id="productComent">
+        <div class="container">
+            <h4 class="mt-2">Отзывы</h4>
+            
+        </div>
+    </section>
 @endsection
