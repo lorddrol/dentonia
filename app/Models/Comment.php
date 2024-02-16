@@ -14,7 +14,7 @@ class Comment extends Model
     public function users(){
         return $this->HasMany(User::class);
     }
-    public function prouct(){
+    public function product(){
         return $this->bilongsTo(Product::class);
     }
 }

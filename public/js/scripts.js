@@ -109,3 +109,14 @@ const allModelAgreement = (t) => {
         prevEl: ".swiper-button-prev",
       },
   });
+
+  var swiper = new Swiper(".mySwiper2", {
+    effect: "cards",
+    grabCursor: true,
+  });
+
+  const accordion = (t, nextAccordion) => {
+    let DivParent = $(t).closest("div[name='discription']");
+    $(DivParent).find("div.d-block").addClass('d-none').removeClass('d-block');
+    $(DivParent).find("div[name='"+ nextAccordion + "']").addClass('d-block').removeClass('d-none')
+  }

@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('discription', 1000);
+            $table->string('structure', 1000);
+            $table->string('application', 1000);
+            $table->string('advantages', 1000);
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->integer('count');
             $table->integer('price');
+            $table->float('sred_star')->default(0);
             $table->timestamps();
         });
     }

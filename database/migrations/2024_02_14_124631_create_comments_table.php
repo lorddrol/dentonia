@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
             $table->string("comment");
             $table->foreignId("product_id")->constrained()->cascadeOnDelete();
+            $table->integer("star");
             $table->timestamps();
         });
     }

@@ -12,13 +12,18 @@ class Product extends Model
         'id',
         'name',
         'discription',
+        'structure',
+        'application',
+        'advantages',
         'price',
-        'category_id'
     ];
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function comments(){
-        return $this->HasMany(Comment::class)
+        return $this->HasMany(Comment::class);
+    }
+    public function photo(){
+        return $this->bilongsTo(Photo::class);
     }
 }

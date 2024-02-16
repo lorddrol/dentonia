@@ -24,7 +24,7 @@
                     <form action="{{ Route('auth') }}" method="post" onsubmit="sendingForm(this, event)">
                         @csrf
                         <div name="login" class="d-block">
-                            <div class="d-flex justify-content-end w-100">
+                            <div class="d-flex justify-content-end">
                                 <button type="button" onclick="nextGuide(this, 'login', 'block')" class="btn-close"
                                     data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>

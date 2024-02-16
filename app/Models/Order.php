@@ -10,9 +10,13 @@ class Order extends Model
 
     protected $fillable = [
     'id',
-    'user_id',
-    'product_id',
     'count',
     'number_order',
     ];
+    public function psers(){
+        return $this->HasMany(User::class);
+    }
+    public function product(){
+        return $this->bilongsTo(Product::class);
+    }
 }

@@ -13,5 +13,8 @@ class Photo extends Model
         'product_id',
         'path'
     ];
+    public function product() {
+        return $this->HasMany(Product::class)
+    }
 
 }
