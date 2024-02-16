@@ -52,7 +52,7 @@ const blurInput = (t)=>{
 // может кастыль
 const nextGuide = (t, next, type) => {
     let tDiv = $(t).closest('.modal-body').get(0);
-    let backg = $(tDiv).find("div[class='d-block']");
+    let backg = $(tDiv).find("div.d-block");
     let nextg = $(tDiv).find("div[name='" + next +"']");
     switch (type) {
         case "none":
@@ -94,7 +94,7 @@ const nextGuide = (t, next, type) => {
 }
 
 const allModelAgreement = (t) => {
-    let DivModalFooter = $(t).closest("div[class='modal-footer'");
+    let DivModalFooter = $(t).closest("div.modal-footer");
     $(DivModalFooter).find("span[name='hiden-modal-footer-bla-bla']").removeClass("d-none");
     $(t).addClass("d-none");
 }
@@ -118,5 +118,19 @@ const allModelAgreement = (t) => {
   const accordion = (t, nextAccordion) => {
     let DivParent = $(t).closest("div[name='discription']");
     $(DivParent).find("div.d-block").addClass('d-none').removeClass('d-block');
-    $(DivParent).find("div[name='"+ nextAccordion + "']").addClass('d-block').removeClass('d-none')
+    $(DivParent).find("div[name='"+ nextAccordion + "']").addClass('d-block').removeClass('d-none');
+    $(DivParent).find("button.focus").removeClass("focus");
+    $(t).addClass("focus")
+  }
+  const accordionM = (t, nextAccordion) => {
+    let DivParent = $(t).closest("div.body-discription");
+    if($(DivParent).find("div[name='"+ nextAccordion + "']").hasClass("d-none")){
+        $(DivParent).find("div[name='"+ nextAccordion + "']").removeClass('d-none').addClass('d-block');
+        $(t).find("div.array-accardion").removeClass("blur");
+    }else{
+        console.log($(DivParent).find("div[name='"+ nextAccordion + "']"));
+        console.log($(DivParent));
+        $(DivParent).find("div[name='"+ nextAccordion + "']").addClass('d-none').removeClass('d-block');
+        $(t).find("div.array-accardion").addClass("blur");
+    }
   }

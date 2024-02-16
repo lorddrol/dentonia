@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/stylecss.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/sliderstile.css') }}">
 </head>
 
 <body>
@@ -25,7 +26,7 @@
                         @csrf
                         <div name="login" class="d-block">
                             <div class="d-flex justify-content-end">
-                                <button type="button" onclick="nextGuide(this, 'login', 'block')" class="btn-close"
+                                <button type="button" class="btn-close"
                                     data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <h2 class="modal-title" id="exampleModalToggleLabel">Войдите в аккаунт</h2>
@@ -49,7 +50,7 @@
                             <div class="d-flex justify-content-between w-100">
                                 <div><button type="button" onclick="nextGuide(this, 'login', 'block')"
                                         class="btn-back"></button></div>
-                                <div><button type="button" onclick="nextGuide(this, 'login', 'block')"
+                                <div><button type="button"
                                         class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -69,7 +70,7 @@
                         <div name="regform" class="d-none">
                             <div class="d-flex justify-content-end w-100">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    onclick="nextGuide(this, 'login', 'block')" aria-label="Close"></button>
+                                     aria-label="Close"></button>
                             </div>
                             <h2 class="modal-title" id="exampleModalToggleLabel">Создайте аккаунт</h2>
                             <div onclick="focusInput(this)" class="background-input default">
@@ -91,7 +92,7 @@
                             <div class="d-flex justify-content-between w-100">
                                 <div><button type="button" onclick="nextGuide(this, 'regform', 'block')"
                                         class="btn-back"></button></div>
-                                <div><button type="button" onclick="nextGuide(this, 'login', 'block')"
+                                <div><button type="button"
                                         class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
