@@ -119,8 +119,9 @@ const allModelAgreement = (t) => {
     let DivParent = $(t).closest("div[name='discription']");
     $(DivParent).find("div.d-block").addClass('d-none').removeClass('d-block');
     $(DivParent).find("div[name='"+ nextAccordion + "']").addClass('d-block').removeClass('d-none');
+    console.log( $(DivParent).find("button.focus"));
     $(DivParent).find("button.focus").removeClass("focus");
-    $(t).addClass("focus")
+    $(t).addClass("focus");
   }
   const accordionM = (t, nextAccordion) => {
     let DivParent = $(t).closest("div.body-discription");

@@ -207,7 +207,6 @@ h4.cart-product-price{
     }
 
     #productComent .title-discription .focus{
-        display: block;
-        border-bottom: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
     }
 

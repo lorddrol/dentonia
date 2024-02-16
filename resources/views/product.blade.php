@@ -43,7 +43,7 @@
             <div class="row">
                 <div name="discription" class="col-12 col-lg-8 mt-4">
                     <div class="title-discription d-none d-lg-block">
-                        <button class="btn-text" onclick="accordion(this,'discription')"> Описание </button> /<button
+                        <button class="btn-text focus" onclick="accordion(this,'discription')"> Описание </button> /<button
                             class="btn-text" type="button" onclick="accordion(this,'structure')"> Состав </button>/<button
                             class="btn-text" type="button" onclick="accordion(this,'application')">
                             Применение </button>/<button class="btn-text" type="button"
