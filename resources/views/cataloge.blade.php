@@ -22,7 +22,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-4 mt-2">
-                                        <a href="/product/1">
+                                        <a href="/product/1" style="text-decoration: none;">
                                         <div class="card w-100">
                                             <img src="public/img/12.jpg" style="border-radius: 10px;" class="card-img-top"
                                                 alt="...">

@@ -2,9 +2,48 @@
 @section('title', 'Каталог')
 @section('content')
 
-
     <section name="productView">
         <div class="container">
+            <div class="modal fade" id="commentFormModal" aria-hidden="true" aria-labelledby="commentFormModalLabel"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div name="comment" class="d-block">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <h2 class="modal-title" id="commentFormModalLabel">НАПИШИТЕ ОТЗЫВ</h2>
+                            <div class="star-add-comment mb-3" style="padding-left: 25px;">
+                            <span class="mb-2" style="color: rgba(34,34,34,.64);">Ваша оценка</span>
+                            <br>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="1">
+                                <label for="star5">&#9733;</label>
+                                <input type="radio" id="star4" name="rating" value="2">
+                                <label for="star4">&#9733;</label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3">&#9733;</label>
+                                <input type="radio" id="star2" name="rating" value="4">
+                                <label for="star2">&#9733;</label>
+                                <input type="radio" id="star1" name="rating" value="5">
+                                <label for="star1">&#9733;</label>
+                              </div>
+                            </div>
+                            <div name="emailParent" onclick="focusInput(this)" class="background-textarea default">
+                                <span class="text-plaseholder text-plaseholder-default">комментарий</span>
+                                <textarea class="w-100 textarea" name="email" onblur="blurInput(this)" cols="20" rows="6"></textarea>
+                                <span class="invalid-feedback"></span>
+                            </div>
+
+                            {{-- переход для ввода пароля --}}
+                            <button type="button" class="btn btn-outline-primary btn-form-reg"
+                                onclick="nextGuide(this, 'password', 'noneEmail')">Продолжить</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6 mt-4" style="position: relative">
                     <div class="swiper mySwiper">
@@ -21,7 +60,6 @@
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
                     </div>
 
                 </div>
@@ -29,7 +67,7 @@
                     <div class="d-flex justify-content-center flex-column" style="height: 100%;">
                         <h3>{{ $p->name }}</h3>
                         <h5 class="mt-3">{{ $p->price }}</h5>
-                        <div class="d-flex">
+                        <div class="cartOrBuy">
                             <button type="button" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
                             <button type="button" class="btn btn-lg btn-primary mt-2">купить сейчас</button>
                         </div>
@@ -62,8 +100,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                            c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                            l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -86,8 +124,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                            c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                            l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -110,8 +148,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                            c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                            l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -134,8 +172,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                            c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                            l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -148,13 +186,37 @@
                         <hr class="d-block d-lg-none">
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 mt-4">
-                    <h4 class="mt-2">Отзывы</h4>
+                <div class="col-12 col-md-6 col-lg-4 mt-4 ms-auto me-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 style="font-size: 16px;">Отзывы</h4>
+                        <button type="button" data-bs-target="#commentFormModal" data-bs-toggle="modal"
+                            class="btn btn-lg btn-outline-primary" style="font-size: 16px;">Оставить комментарий</button>
+                    </div>
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-                                    quo ducimus natus quos debitis placeat</div>
+                                <div class="swiper-slide">
+                                    <div class="card-comment">
+                                        <span>Lorem loremovich</span>
+                                        <div class="d-flex justify-content-center mt-2 mb-2">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                    viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"
+                                                    xml:space="preserve">
+                                                    <style type="text/css">
+                                                    </style>
+                                                    <g>
+                                                        <polygon class="st0"
+                                                            points="16,6.1 10,6.1 8,0 6,6.1 0,6.1 5,9.6 3,16 8,12 13,16 11,9.6 	" />
+                                                    </g>
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
+                                            quo ducimus natus quos debitis placeat</span>
+                                    </div>
+                                </div>
                                 <div class="swiper-slide">Slide 2</div>
                                 <div class="swiper-slide">Slide 3</div>
                                 <div class="swiper-slide">Slide 4</div>

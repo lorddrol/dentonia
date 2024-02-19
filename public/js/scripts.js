@@ -27,7 +27,7 @@ const sendingForm =(t, event) =>{
 }
 
 const focusInput = (t)=>{
-    let $input=$(t).find("input").first();
+    let $input=$(t).find("input, textarea").first();
     let $span=$(t).find("span").first();
     $input.focus();
     $span.addClass("text-plaseholder-focused");
@@ -41,7 +41,7 @@ const focusInput = (t)=>{
 const blurInput = (t)=>{
     let tDiv = $(t).parent('div').get(0);
     let $span=$(tDiv).find("span").first();
-    if($(tDiv).find("input").val() == ""){
+    if($(tDiv).find("input, textarea").val() == ""){
     $span.removeClass("text-plaseholder-focused");
     $span.addClass("text-plaseholder-default");
     $(tDiv).removeClass("focused");
@@ -135,3 +135,13 @@ const allModelAgreement = (t) => {
         $(t).find("div.array-accardion").addClass("blur");
     }
   }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    let stars = document.querySelectorAll('.rating input');
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        // Отправить выбранную оценку на сервер или выполнить другие действия
+        console.log('Выбранная оценка:', this.value);
+      });
+    });
+  });

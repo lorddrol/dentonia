@@ -9,7 +9,6 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/stylecss.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/sliderstile.css') }}">
 </head>

@@ -210,3 +210,84 @@ h4.cart-product-price{
         border-bottom: 2px solid #0d6efd;
     }
 
+.array-accardion svg {
+    fill: #0d6efd;
+}
+
+.swiper.mySwiper2 .swiper-slide .card-comment *{
+    font-size: 22px;
+    color: #fff;
+}
+.swiper.mySwiper2 .swiper-slide .card-comment svg{
+    width: 25px;
+    height: 25px;
+    color: #fff;
+}
+@media (max-width: 767px){
+.cartOrBuy .btn{
+    width: 100%;
+}
+}
+.cartOrBuy{
+    display: block;
+}
+
+.background-textarea{
+    position: relative;
+    border-radius: 25px;
+    height: 200px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 10px;
+}
+.background-textarea .textarea{
+    margin-top: 20px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    appearance: none;
+}
+.background-textarea .textarea:focus{
+    outline: none;
+    border: none;
+    background: none;
+    appearance: none;
+}
+
+.background-textarea.default{
+    border: 2px solid rgba(34,34,34,.64);
+    transition: all 0.5s ease;
+}
+.background-textarea.focused{
+    border: 2px solid #222;
+    transition: all 0.5s ease;
+}
+.background-textarea.error{
+    border: 2px solid #dc3545;
+    transition: all 0.5s ease;
+}
+
+.star-add-comment svg{
+    width: 25px; height: 25px;
+    fill: rgba(34,34,34,.64);
+}
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: left;
+  }
+
+  .rating > input {
+    display: none;
+  }
+
+  .rating > label {
+    color: grey;
+    font-size: 30px;
+  }
+
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: orange;
+  }
