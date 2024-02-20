@@ -28,7 +28,7 @@
                                                 alt="...">
                                             <div class="card-body">
                                                 <h2 class="product-cart-name">котай</h2>
-                                                <h4 class="cart-product-price">123 ₽</h4>
+                                                <h4 class="product-cart-price">123 ₽</h4>
                                             </div>
                                         </div>
                                         </a>

@@ -36,17 +36,33 @@
                                         </div>
                                     </div>
                                     @auth
-                                    @if (!Auth::user()->fio)
+                                    @if (isset(Auth::user()->fio))
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input focused">
+                                        <span class="text-plaseholder text-plaseholder-focused">ФИО</span>
+                                        <input class="w-100 input" value="{{Auth::user()->fio}}" name="fio" onblur="blurInput(this)"></input>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
+                                    @else
                                     <div name="fioParent" onclick="focusInput(this)" class="background-input default">
                                         <span class="text-plaseholder text-plaseholder-default">ФИО</span>
                                         <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endif
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input focused">
+                                        <span class="text-plaseholder text-plaseholder-focused">Email</span>
+                                        <input class="w-100 input" value="{{Auth::user()->email}}" name="Email" onblur="blurInput(this)"></input>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
                                     @endauth
                                     @guest
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                        <span class="text-plaseholder text-plaseholder-default">ФИО</span>
+                                        <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
                                     <div name="EmailParent" onclick="focusInput(this)" class="background-input default">
-                                        <span class="text-plaseholder text-plaseholder-focus">Email</span>
+                                        <span class="text-plaseholder text-plaseholder-default">Email</span>
                                         <input class="w-100 input" name="Email" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>

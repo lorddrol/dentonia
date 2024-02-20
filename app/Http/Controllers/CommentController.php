@@ -13,6 +13,8 @@ class CommentController extends Controller
     $validator = Validator::make($r->all(),[
         'rating' => 'required',
         'comment' => 'required|string',
+        'email' => 'required|string|unique:App\Models\Comment,email',
+        'fio' => 'required|string',
     ]);
     if($validator->fails()){
         return response()->json($validator->errors(), 422);
@@ -20,6 +22,8 @@ class CommentController extends Controller
     Comment::Create([
         'comment' => $r->comment,
         'star' => $r->rating,
+        'emailt' => $r->email,
+        'fio' => $r->fio,
         'product_id' => $id,
         'user_id' => Auth::user()->id,
     ]);

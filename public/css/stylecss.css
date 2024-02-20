@@ -91,7 +91,7 @@ svg path {
 p.categories-name{
     margin-bottom: 5px;
 }
-h4.cart-product-price{
+h4.product-cart-price{
     font-weight: 400;
 }
 .background-input{
@@ -291,3 +291,58 @@ h4.cart-product-price{
   .rating:not(:checked) > label:hover ~ label {
     color: orange;
   }
+
+  .cart-text{
+    font-size: 14px;
+    color: rgba(34,34,34,.64);
+  }
+
+  .count-cart-minus{
+    font-size: 24px;
+    width: 33%;
+  }
+
+  .count-cart-count{
+    font-size: 24px;
+    width: 33%;
+    text-align: center;
+  }
+  .count-cart-count span{
+    vertical-align: sub;
+  }
+
+  .count-cart-plinus{
+    font-size: 24px;
+    width: 33%;
+
+  }
+
+  .count-cart{
+    background-color: rgba(34,34,34,.16);
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+  }
+
+  .price-cart{
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .checkbox-item-cart{
+
+  }
+
+  .img-cart{
+    overflow: hidden;
+    height: 150px;
+    position: relative;
+  }
+  .img-cart img{
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }
+
