@@ -13,8 +13,7 @@ class ProductController extends Controller
     }
     function viewproduct($id) {
         $product = Product::firstWhere('id',$id);
-        $comment = Comment::find(['product_id' => $id]);
-        dd($comment[0]);
+        $comment = Comment::where('product_id', $id)->get();
         return view('product',[
             'p' => $product,
             'c' => $comment,

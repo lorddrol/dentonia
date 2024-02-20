@@ -162,7 +162,8 @@
             </div>
             <div style="
             margin: 0 5px;">
-                <img src="{{ asset('public/img/shoppingbasket3_114870.svg') }}" class="icon1" alt="">
+                <a href="{{route("cartView")}}"><img src="{{ asset('public/img/shoppingbasket3_114870.svg') }}" class="icon1" alt=""></a>
+
                 <a data-bs-toggle="modal" href="#authOrReg" role="button"><img
                         src="{{ asset('public/img/account_avatar_face_man_people_profile_user_icon_123197.svg') }}"
                         class="icon2" alt=""></a>

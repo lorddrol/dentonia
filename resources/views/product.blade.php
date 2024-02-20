@@ -10,40 +10,76 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <div name="comment" class="d-block">
-                            <form action="{{Route("commentadd", ["id" => $p->id])}}" onsubmit="sendingForm(this, event)" method="post">
-                            @csrf
-                                <div class="d-flex justify-content-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <h2 class="modal-title" id="commentFormModalLabel">НАПИШИТЕ ОТЗЫВ</h2>
-                            <div class="star-add-comment mb-3" style="padding-left: 25px;">
-                            <span class="mb-2" style="color: rgba(34,34,34,.64);">Ваша оценка</span>
-                            <br>
-                            <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5">
-                                <label for="star5">&#9733;</label>
-                                <input type="radio" id="star4" name="rating" value="4">
-                                <label for="star4">&#9733;</label>
-                                <input type="radio" id="star3" name="rating" value="3">
-                                <label for="star3">&#9733;</label>
-                                <input type="radio" id="star2" name="rating" value="2">
-                                <label for="star2">&#9733;</label>
-                                <input type="radio" id="star1" name="rating" value="1">
-                                <label for="star1">&#9733;</label>
-                                <span class="invalid-feedback"></span>
-                              </div>
-                            </div>
-                            <div name="commentParent" onclick="focusInput(this)" class="background-textarea default">
-                                <span class="text-plaseholder text-plaseholder-default">комментарий</span>
-                                <textarea class="w-100 textarea" name="comment" onblur="blurInput(this)" cols="20" rows="6"></textarea>
-                                <span class="invalid-feedback"></span>
-                            </div>
+                                <form action="{{ Route('commentadd', ['id' => $p->id]) }}"
+                                    onsubmit="sendingForm(this, event)" method="post">
+                                    @csrf
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <h2 class="modal-title" id="commentFormModalLabel">НАПИШИТЕ ОТЗЫВ</h2>
+                                    <div class="star-add-comment mb-2" style="padding-left: 25px;">
+                                        <span class="mb-1" style="color: rgba(34,34,34,.64);">Ваша оценка</span>
+                                        <br>
+                                        <div class="rating">
+                                            <input type="radio" id="star5" name="rating" value="5">
+                                            <label for="star5">&#9733;</label>
+                                            <input type="radio" id="star4" name="rating" value="4">
+                                            <label for="star4">&#9733;</label>
+                                            <input type="radio" id="star3" name="rating" value="3">
+                                            <label for="star3">&#9733;</label>
+                                            <input type="radio" id="star2" name="rating" value="2">
+                                            <label for="star2">&#9733;</label>
+                                            <input type="radio" id="star1" name="rating" value="1">
+                                            <label for="star1">&#9733;</label>
+                                            <span class="invalid-feedback"></span>
+                                        </div>
+                                    </div>
+                                    @auth
+                                    @if (!Auth::user()->fio)
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                        <span class="text-plaseholder text-plaseholder-default">ФИО</span>
+                                        <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
+                                    @endif
+                                    @endauth
+                                    @guest
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input default">
+                                        <span class="text-plaseholder text-plaseholder-focus">Email</span>
+                                        <input class="w-100 input" name="Email" onblur="blurInput(this)"></input>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
+                                    @endguest
 
-                            {{-- переход для ввода пароля --}}
-                            <button type="submit" class="btn btn-outline-primary btn-form-reg">Продолжить</button>
-                            </form>
+                                    <div name="commentParent" onclick="focusInput(this)"
+                                        class="background-textarea default">
+                                        <span class="text-plaseholder text-plaseholder-default">Комментарий</span>
+                                        <textarea class="w-100 textarea" name="comment" onblur="blurInput(this)" cols="20" rows="3"></textarea>
+                                        <span class="invalid-feedback"></span>
+                                    </div>
+
+                                    {{-- переход для ввода пароля --}}
+                                    <button type="submit" class="btn btn-outline-primary btn-form-reg">Продолжить</button>
+
+                                </form>
+                            </div>
                         </div>
-                        </div>
+                            <div class="modal-footer" name="modalFooter">
+                                <span class="model-agreement">Используя этот сайт, вы автоматически создаете или используете
+                                    имеющуюся учетную запись на dentonia, соглашаетесь на обработку персональных данных и
+                                    принимаете
+                                    условия <a class="model-agreement-a" href="">Пользовательских соглашений
+                                        Dentonia</a>
+                                    <span class="model-agreement-a" type="button"
+                                        onclick="allModelAgreement(this)">Подробнее</span><span
+                                        name="hiden-modal-footer-bla-bla" class="model-agreement d-none">, <a
+                                            class="model-agreement-a" href="">Политикой
+                                            конфиденциальности Dentonia</a>, даете согласие на сбор и обработку данных в
+                                        соответствии с ними, в т.ч. с применением cookie файлов, средств анализа поведения
+                                        пользователей, с привлечением сторонних сервисов, соглашаетесь на получение
+                                        рекламно-информационных материалов от Dentonia.</span></span>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -54,12 +90,6 @@
                             <div class="swiper-slide"><img src="/public/img/c1.jpg" alt=""></div>
                             <div class="swiper-slide"><img src="/public/img/c2.jpg" alt=""></div>
                             <div class="swiper-slide"><img src="/public/img/c3.jpg" alt=""></div>
-                            <div class="swiper-slide">Slide 4</div>
-                            <div class="swiper-slide">Slide 5</div>
-                            <div class="swiper-slide">Slide 6</div>
-                            <div class="swiper-slide">Slide 7</div>
-                            <div class="swiper-slide">Slide 8</div>
-                            <div class="swiper-slide">Slide 9</div>
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -84,9 +114,9 @@
             <div class="row">
                 <div name="discription" class="col-12 col-lg-8 mt-4">
                     <div class="title-discription d-none d-lg-block">
-                        <button class="btn-text focus" onclick="accordion(this,'discription')"> Описание </button> /<button
-                            class="btn-text" type="button" onclick="accordion(this,'structure')"> Состав </button>/<button
-                            class="btn-text" type="button" onclick="accordion(this,'application')">
+                        <button class="btn-text focus" onclick="accordion(this,'discription')"> Описание </button>
+                        /<button class="btn-text" type="button" onclick="accordion(this,'structure')"> Состав
+                        </button>/<button class="btn-text" type="button" onclick="accordion(this,'application')">
                             Применение </button>/<button class="btn-text" type="button"
                             onclick="accordion(this,'advantages')"> Преимущества </span>
                     </div>
@@ -103,8 +133,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                    c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                    l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -127,8 +157,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                    c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                    l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -151,8 +181,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                    c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                    l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -175,8 +205,8 @@
                                         <g>
                                             <path
                                                 d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                                c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                                l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                                    c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                    l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -198,38 +228,40 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
-                                @foreach ($c as $ct)
-                                <div class="swiper-slide">
-                                    <div class="card-comment">
-                                        <span>{{$ct->users()->fio}}</span>
-                                        <div class="d-flex justify-content-center mt-2 mb-2">
-                                            @for ($i = 0; $i < 5; $i++)
-                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                    viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"
-                                                    xml:space="preserve">
-                                                    <style type="text/css">
-                                                    </style>
-                                                    <g>
-                                                        <polygon class="st0"
-                                                            points="16,6.1 10,6.1 8,0 6,6.1 0,6.1 5,9.6 3,16 8,12 13,16 11,9.6 	" />
-                                                    </g>
-                                                </svg>
-                                            @endfor
+                                @if (empty($c))
+
+
+                                    @foreach ($c as $ct)
+                                        <div class="swiper-slide">
+                                            <div class="card-comment">
+                                                <span>{{ $ct->user->fio }}</span>
+                                                <div class="d-flex justify-content-center mt-2 mb-2">
+                                                    @for ($i = 0; $i < $ct->star; $i++)
+                                                        <svg version="1.1" id="Capa_1"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                            viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;"
+                                                            xml:space="preserve">
+                                                            <style type="text/css">
+                                                            </style>
+                                                            <g>
+                                                                <polygon class="st0"
+                                                                    points="16,6.1 10,6.1 8,0 6,6.1 0,6.1 5,9.6 3,16 8,12 13,16 11,9.6 	" />
+                                                            </g>
+                                                        </svg>
+                                                    @endfor
+                                                </div>
+                                                <span>{{ $ct->comment }}</span>
+                                            </div>
                                         </div>
-                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-                                            quo ducimus natus quos debitis placeat</span>
+                                    @endforeach
+                                @else
+                                    <div class="swiper-slide">
+                                        <div class="card-comment">
+                                            <span>Здесь ещё нету комментариев. Оставте первый!</span>
+                                        </div>
                                     </div>
-                                </div>
-                                @endforeach
-                                <div class="swiper-slide">Slide 2</div>
-                                <div class="swiper-slide">Slide 3</div>
-                                <div class="swiper-slide">Slide 4</div>
-                                <div class="swiper-slide">Slide 5</div>
-                                <div class="swiper-slide">Slide 6</div>
-                                <div class="swiper-slide">Slide 7</div>
-                                <div class="swiper-slide">Slide 8</div>
-                                <div class="swiper-slide">Slide 9</div>
+                                @endif
                             </div>
                         </div>
                     </div>

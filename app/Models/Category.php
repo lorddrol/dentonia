@@ -13,6 +13,6 @@ class Category extends Model
         'name',
     ];
         public function products(){
-            return $this->BilongsTo(Product::class);
+            return $this->BelongsTo(Product::class);
         }
 }

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin' => 'boolean',
+        'fio',
     ];
 
     /**
@@ -34,7 +35,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'is_admin',
-        'fio',
     ];
 
 
@@ -47,7 +47,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function Comments(){
-        return $this->HasOne(Comment::class);
-    }
 }

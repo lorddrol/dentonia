@@ -13,13 +13,12 @@ class Comment extends Model
         'id',
         'comment',
         'star',
+        'fio',
+        'email',
         'user_id',
-        'product_id'
+        'product_id',
     ];
-    public function users(){
-        return $this->HasMany(User::class);
-    }
     public function product(){
-        return $this->bilongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

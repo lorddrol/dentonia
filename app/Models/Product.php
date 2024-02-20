@@ -27,6 +27,6 @@ class Product extends Model
         return $this->HasOne(Comment::class);
     }
     public function photo(){
-        return $this->bilongsTo(Photo::class);
+        return $this->belongsTo(Photo::class);
     }
 }

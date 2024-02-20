@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            $table->string('fio');
+            $table->string('email')->unique();
             $table->string("comment");
             $table->foreignId("product_id")->constrained()->cascadeOnDelete();
             $table->integer("star");

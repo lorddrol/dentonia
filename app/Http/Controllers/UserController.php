@@ -17,8 +17,8 @@ class UserController extends Controller
         ]);
 
     if($Validator->fails()){
-        return response()->json([
-            'password' => 'Некорректные учетные данные'], 422);
+        return response()->json(["errors" =>[
+            'password' => 'Некорректные учетные данные']], 422);
     }
 
     User::Create([
@@ -26,6 +26,7 @@ class UserController extends Controller
         'password' => Hash::make($r->password),
     ]);
     Auth::attempt(['email' => $r->email, 'password' => $r->password]);
+    Auth::user()->refresh();
 
     return response()->json(['success' => true], 200);
 }
@@ -38,6 +39,7 @@ class UserController extends Controller
             return response()->json(['errors' => $Validator->errors()], 422);
         }
         if(Auth::attempt(['email' => $r->email, 'password' => $r->password,])){
+            Auth::user()->refresh();
             return response()->json(['success' => true], 200);
         } else {
             return response()->json(['errors' => ['password' => 'Некорректные учетные данные']], 422);

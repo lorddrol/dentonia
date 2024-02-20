@@ -15,12 +15,9 @@ class Order extends Model
     'count',
     'number_order',
     'user_id',
-    'product_id'
+    'product_id',
     ];
     public function users(){
         return $this->HasMany(User::class);
-    }
-    public function product(){
-        return $this->bilongsTo(Product::class);
     }
 }
