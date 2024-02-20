@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Photo;
 
 class Product extends Model
 {
@@ -16,12 +18,13 @@ class Product extends Model
         'application',
         'advantages',
         'price',
+        'category_id'
     ];
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function comments(){
-        return $this->HasMany(Comment::class);
+        return $this->HasOne(Comment::class);
     }
     public function photo(){
         return $this->bilongsTo(Photo::class);

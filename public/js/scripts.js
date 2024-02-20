@@ -1,3 +1,6 @@
+var modalToggleAuthOrReg = document.getElementById('authOrReg'); // relatedTarget
+var modalToggleCommentFormModal = document.getElementById('commentFormModal');
+
 const sendingForm =(t, event) =>{
     event.preventDefault();
 
@@ -8,7 +11,7 @@ const sendingForm =(t, event) =>{
         data: $(t).serialize(),
         success: function (res) {
             if(res["success"] === true){
-                window.location.href = '/';
+                window.location.reload();
             }
         },
         error: function (err){

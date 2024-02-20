@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Comment;
 
 class ProductController extends Controller
 {
@@ -11,10 +12,12 @@ class ProductController extends Controller
         return view('cataloge');
     }
     function viewproduct($id) {
-        $id1 = 1;
-        $product = Product::firstOrNew(['id' =>$id1]);
+        $product = Product::firstWhere('id',$id);
+        $comment = Comment::find(['product_id' => $id]);
+        dd($comment[0]);
         return view('product',[
             'p' => $product,
+            'c' => $comment,
         ]);
     }
 }

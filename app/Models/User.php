@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Comment;
 
 class User extends Authenticatable
 {
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'is_admin',
+        'fio',
     ];
 
 
@@ -46,6 +48,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     public function Comments(){
-        return $this->BilongsTo(Comment:class);
+        return $this->HasOne(Comment::class);
     }
 }

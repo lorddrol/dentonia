@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
+use App\Http\controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +18,17 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {return view('main');})->name('home');
+Route::get("/", function () {return view("main");})->name("home");
 
-Route::middleware(['guest'])->group(function () {
-    Route::post('/reg', [UserController::class, 'registration'])->name('reg');
-    Route::post('/auth', [UserController::class, 'auth'])->name('auth');
+Route::middleware(["guest"])->group(function () {
+    Route::post("/reg", [UserController::class, "registration"])->name("reg");
+    Route::post("/auth", [UserController::class, "auth"])->name("auth");
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(["auth"])->group(function () {
     Route::get("/logout", [UserController::class, "logout"])->name("logout");
 });
 
-Route::get('/cataloge', [ProductController::class, 'index'])->name("cataloge");
-Route::get('/product/{id}', [ProductController::class, 'viewproduct'])->name("viewproduct");
+Route::get("/cataloge", [ProductController::class, "index"])->name("cataloge");
+Route::get("/product/{id}", [ProductController::class, "viewproduct"])->name("viewproduct");
+Route::post("/commentadd/{id}", [CommentController::class, "commentadd"])->name("commentadd");

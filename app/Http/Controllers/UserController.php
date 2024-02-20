@@ -37,8 +37,8 @@ class UserController extends Controller
         if($Validator->fails()){
             return response()->json(['errors' => $Validator->errors()], 422);
         }
-        if(Auth::attempt(['email' => $r->email, 'password' => $r->password])){
-            return response()->json(['auth' => 'success'], 200);
+        if(Auth::attempt(['email' => $r->email, 'password' => $r->password,])){
+            return response()->json(['success' => true], 200);
         } else {
             return response()->json(['errors' => ['password' => 'Некорректные учетные данные']], 422);
         }

@@ -15,7 +15,7 @@
 
 <body>
     {{-- модалка --}}
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    <div class="modal fade" id="authOrReg" aria-hidden="true" aria-labelledby="authOrRegLabel"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -28,7 +28,7 @@
                                 <button type="button" class="btn-close"
                                     data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <h2 class="modal-title" id="exampleModalToggleLabel">Войдите в аккаунт</h2>
+                            <h2 class="modal-title" id="authOrRegLabel">Войдите в аккаунт</h2>
                             <div name="emailParent" onclick="focusInput(this)" class="background-input default">
                                 <span class="text-plaseholder text-plaseholder-default">телефон или E-mail</span>
                                 <input type="email" name="email" onblur="blurInput(this)" class="w-100 input">
@@ -53,7 +53,7 @@
                                         class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
-                            <h2 class="modal-title" id="exampleModalToggleLabel">Введите пароль</h2>
+                            <h2 class="modal-title">Введите пароль</h2>
                             <div onclick="focusInput(this)" class="background-input default">
                                 <span class="text-plaseholder text-plaseholder-default">Пароль</span>
                                 <input type="password" name="password" onblur="blurInput(this)" class="w-100 input">
@@ -71,7 +71,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                      aria-label="Close"></button>
                             </div>
-                            <h2 class="modal-title" id="exampleModalToggleLabel">Создайте аккаунт</h2>
+                            <h2 class="modal-title">Создайте аккаунт</h2>
                             <div onclick="focusInput(this)" class="background-input default">
                                 <span class="text-plaseholder text-plaseholder-default">телефон или E-mail</span>
                                 <input type="email" name="email" onblur="blurInput(this)" class="w-100 input">
@@ -95,7 +95,7 @@
                                         class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
-                            <h2 class="modal-title" id="exampleModalToggleLabel">Ведите пароль</h2>
+                            <h2 class="modal-title">Ведите пароль</h2>
                             <div onclick="focusInput(this)" class="background-input default">
                                 <span class="text-plaseholder text-plaseholder-default">пароль</span>
                                 <input type="password" name="password" onblur="blurInput(this)" class="w-100 input">
@@ -163,7 +163,7 @@
             <div style="
             margin: 0 5px;">
                 <img src="{{ asset('public/img/shoppingbasket3_114870.svg') }}" class="icon1" alt="">
-                <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img
+                <a data-bs-toggle="modal" href="#authOrReg" role="button"><img
                         src="{{ asset('public/img/account_avatar_face_man_people_profile_user_icon_123197.svg') }}"
                         class="icon2" alt=""></a>
             </div>

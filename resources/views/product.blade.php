@@ -10,7 +10,9 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <div name="comment" class="d-block">
-                            <div class="d-flex justify-content-end">
+                            <form action="{{Route("commentadd", ["id" => $p->id])}}" onsubmit="sendingForm(this, event)" method="post">
+                            @csrf
+                                <div class="d-flex justify-content-end">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <h2 class="modal-title" id="commentFormModalLabel">НАПИШИТЕ ОТЗЫВ</h2>
@@ -18,27 +20,28 @@
                             <span class="mb-2" style="color: rgba(34,34,34,.64);">Ваша оценка</span>
                             <br>
                             <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="1">
+                                <input type="radio" id="star5" name="rating" value="5">
                                 <label for="star5">&#9733;</label>
-                                <input type="radio" id="star4" name="rating" value="2">
+                                <input type="radio" id="star4" name="rating" value="4">
                                 <label for="star4">&#9733;</label>
                                 <input type="radio" id="star3" name="rating" value="3">
                                 <label for="star3">&#9733;</label>
-                                <input type="radio" id="star2" name="rating" value="4">
+                                <input type="radio" id="star2" name="rating" value="2">
                                 <label for="star2">&#9733;</label>
-                                <input type="radio" id="star1" name="rating" value="5">
+                                <input type="radio" id="star1" name="rating" value="1">
                                 <label for="star1">&#9733;</label>
+                                <span class="invalid-feedback"></span>
                               </div>
                             </div>
-                            <div name="emailParent" onclick="focusInput(this)" class="background-textarea default">
+                            <div name="commentParent" onclick="focusInput(this)" class="background-textarea default">
                                 <span class="text-plaseholder text-plaseholder-default">комментарий</span>
-                                <textarea class="w-100 textarea" name="email" onblur="blurInput(this)" cols="20" rows="6"></textarea>
+                                <textarea class="w-100 textarea" name="comment" onblur="blurInput(this)" cols="20" rows="6"></textarea>
                                 <span class="invalid-feedback"></span>
                             </div>
 
                             {{-- переход для ввода пароля --}}
-                            <button type="button" class="btn btn-outline-primary btn-form-reg"
-                                onclick="nextGuide(this, 'password', 'noneEmail')">Продолжить</button>
+                            <button type="submit" class="btn btn-outline-primary btn-form-reg">Продолжить</button>
+                            </form>
                         </div>
                         </div>
                     </div>
@@ -195,9 +198,10 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
+                                @foreach ($c as $ct)
                                 <div class="swiper-slide">
                                     <div class="card-comment">
-                                        <span>Lorem loremovich</span>
+                                        <span>{{$ct->users()->fio}}</span>
                                         <div class="d-flex justify-content-center mt-2 mb-2">
                                             @for ($i = 0; $i < 5; $i++)
                                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -217,6 +221,7 @@
                                             quo ducimus natus quos debitis placeat</span>
                                     </div>
                                 </div>
+                                @endforeach
                                 <div class="swiper-slide">Slide 2</div>
                                 <div class="swiper-slide">Slide 3</div>
                                 <div class="swiper-slide">Slide 4</div>
