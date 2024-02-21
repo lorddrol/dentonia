@@ -34,3 +34,4 @@ Route::get("/cataloge", [ProductController::class, "index"])->name("cataloge");
 Route::get("/product/{id}", [ProductController::class, "viewproduct"])->name("viewproduct");
 Route::post("/commentadd/{id}", [CommentController::class, "commentadd"])->name("commentadd");
 Route::get("/cart", [CartController::class, "cartView"])->name("cartView");
+Route::post('/cart/price', [CartController::class, 'priceProduct'])->name('priceProduct');

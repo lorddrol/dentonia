@@ -310,7 +310,6 @@ h4.product-cart-price{
   .count-cart-count span{
     vertical-align: sub;
   }
-
   .count-cart-plinus{
     font-size: 24px;
     width: 33%;
@@ -321,24 +320,22 @@ h4.product-cart-price{
     background-color: rgba(34,34,34,.16);
     border-radius: 20px 20px 20px 20px;
     display: flex;
+    max-width: 200px;
   }
 
   .price-cart{
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
-  }
-
-  .checkbox-item-cart{
-
   }
 
   .img-cart{
     overflow: hidden;
-    height: 150px;
     position: relative;
+    border-radius: 30px;
   }
+
   .img-cart img{
-    height: 150px;
+    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -346,3 +343,17 @@ h4.product-cart-price{
     object-fit: cover;
   }
 
+  @media(min-width:992px){
+    .price-cart{
+    text-align: center;
+    }
+}
+@media(max-width:991px){
+    .price-cart{
+    text-align: start;
+    margin-top: 10px;
+    }
+    .count-cart{
+        margin-top: 10px;
+    }
+}
