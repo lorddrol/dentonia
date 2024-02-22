@@ -128,7 +128,8 @@
             <div class="w-75 d-block d-lg-none">
                 <form class="d-flex " role="search">
                     <input class="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit"><img src="{{ asset('public/img/magnifier-1_icon-icons.com_56924.svg') }}" class="icon-search"
+                            alt=""></button>
                 </form>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

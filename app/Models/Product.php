@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Photo;
+use App\Models\Cart;
 
 class Product extends Model
 {
@@ -28,5 +29,8 @@ class Product extends Model
     }
     public function photo(){
         return $this->belongsTo(Photo::class);
+    }
+    public function carts(){
+        return $this->belongsTo(Cart::class);
     }
 }

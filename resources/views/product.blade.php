@@ -12,7 +12,6 @@
                             <div name="comment" class="d-block">
                                 <form action="{{ Route('commentadd', ['id' => $p->id]) }}"
                                     onsubmit="sendingForm(this, event)" method="post">
-                                    @csrf
                                     <div class="d-flex justify-content-end">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>

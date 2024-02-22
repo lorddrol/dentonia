@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Comment;
+use App\Models\Cart;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -47,4 +49,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function Orders(){
+        return $this->belongsTo(Order::class);
+    }
+    public function comments(){
+        return $this->belongsTo(Comment::class);
+    }
+    public function carts(){
+        return $this->belongsTo(Cart::class);
+    }
 }

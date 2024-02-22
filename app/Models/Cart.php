@@ -7,18 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 use App\Models\User;
 
-class Comment extends Model
+class cart extends Model
 {
     protected $fillable = [
-        'id',
-        'comment',
-        'star',
-        'fio',
-        'email',
-        'user_id',
-        'product_id',
+    'id',
+    'count',
+    'user_id',
+    'product_id',
     ];
-    public function product(){
+    public function products(){
         return $this->belongsTo(Product::class);
     }
     public function users(){

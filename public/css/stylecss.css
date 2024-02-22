@@ -320,7 +320,7 @@ h4.product-cart-price{
     background-color: rgba(34,34,34,.16);
     border-radius: 20px 20px 20px 20px;
     display: flex;
-    max-width: 200px;
+    max-width: 150px;
   }
 
   .price-cart{
@@ -349,6 +349,53 @@ h4.product-cart-price{
     .price-cart{
     text-align: center;
     }
+    .itogBuyBlock{
+        border: 2px solid #dee2e6;
+        border-radius: 10px;
+        width: 100%;
+    }
+}
+@media(max-width:576px){
+    .itogBuyBlock{
+        width: 100%;
+        position:fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        border-radius: 10px;
+        border-top: 2px solid #dee2e6;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+}
+@media(min-width:576px) and (max-width:767px){
+    .itogBuyBlock{
+        width: 540px;
+        position:fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        border-radius: 10px;
+        border-top: 2px solid #dee2e6;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+}
+@media(min-width:767px) and (max-width:992px){
+    .itogBuyBlock{
+        width: 720px;
+        position:fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        border-radius: 10px;
+        border-top: 2px solid #dee2e6;
+        border-left: 2px solid #dee2e6;
+        border-right: 2px solid #dee2e6;
+        border-bottom: none;
+    }
 }
 @media(max-width:991px){
     .price-cart{
@@ -357,5 +404,16 @@ h4.product-cart-price{
     }
     .count-cart{
         margin-top: 10px;
+    }
+    .itogBuyBlock{
+        background: #fff;
+        border-radius: 10px 10px 0px 0px;
+        border-top: 2px solid #dee2e6;
+        border-left: 2px solid #dee2e6;
+        border-right: 2px solid #dee2e6;
+        border-bottom: none;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

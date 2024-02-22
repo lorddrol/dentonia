@@ -35,3 +35,4 @@ Route::get("/product/{id}", [ProductController::class, "viewproduct"])->name("vi
 Route::post("/commentadd/{id}", [CommentController::class, "commentadd"])->name("commentadd");
 Route::get("/cart", [CartController::class, "cartView"])->name("cartView");
 Route::post('/cart/price', [CartController::class, 'priceProduct'])->name('priceProduct');
+Route::post('/cart/countChange', [CartController::class, 'countChangeProduct'])->name('countChangeProduct');
