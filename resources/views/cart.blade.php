@@ -8,41 +8,41 @@
         <div class="container">
             <h1>Корзина</h1>
             <div class="row">
-                <div class="col-12 col-lg-8 col-lg-9">
+                <div class="col-12 col-md-6 col-lg-7 col-xl-8" style="margin: 20px 0;">
                     <div class="row">
-                        <div class="col-5 col-lg-3 img-cart"><img src="public/img/12.jpg" alt=""></div>
-                        <div class="col-6 col-lg-8">
+                        <div class="col-5 col-lg-3 col-xl-2 img-cart"><img src="public/img/12.jpg" alt=""></div>
+                        <div class="col-6 col-lg-8 col-xl-9">
                             <div class="row">
                                 <div class="col-12 col-lg-5"><span class="cart-text">ЗУБНАЯ ЩЕТКА ULTRASOFT
                                         CS546032qwewrqweqwe</span>
-                                        <div class=" d-block d-xl-none">
+                                    <div class=" d-block d-xl-none">
                                         <div class="count-cart">
                                             <button class="btn-text count-cart-minus">-</button>
                                             <div class="count-cart-count"><span>29</span></div>
                                             <button class="btn-text count-cart-plinus">+</button>
-                                        </div></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="d-none d-xl-block">
+                                <div class=" d-none d-xl-block col-xl-3">
                                     <div class="count-cart">
                                         <button class="btn-text count-cart-minus">-</button>
                                         <div class="count-cart-count"><span>29</span></div>
                                         <button class="btn-text count-cart-plinus">+</button>
                                     </div>
                                 </div>
-                                </div>
-                                <div class="col-12 col-lg-4 price-cart">
+                                <div class="col-12 col-lg-7 col-xl-4 price-cart">
                                     <span>123423 &#x20bd</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-1 col-lg-1 checkBoxAddCart text-center">
-                            <input type="checkbox" onclick="addBuyCart(this, 1, 3)" class="checkbox-item-cart" name="checkBoxBuy">
+                            <input type="checkbox" onclick="addBuyCart(this, 1, 3)" class="checkbox-item-cart"
+                                name="checkBoxBuy">
                         </div>
 
                     </div>
                 </div>
-                <div name="itog" class="col-12 col-md-4 col-lg-3">
+                <div name="itog" id="ItogBuyCartblock" class="col-12 col-md-4 col-lg-5 col-xl-4">
                     <h4>Оформите заказ</h4>
                     <div class="border p-3">
                         <div class="row">
@@ -50,7 +50,28 @@
                         </div>
                         <hr>
                         <div>
-                            <button class="btn btn-lg btn-primary w-100">1</button>
+                            <button class="btn btn-lg btn-secondary w-100">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-light">К оформлению</span>
+                                    <div class="d-flex">
+                                        <span class="priceText text-light me-2"></span>
+                                        <span style="transform: rotate(-90deg);">
+                                        <svg version="1.1" id="Capa_1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" hieght="25px" width="25px"
+                                                viewBox="0 0 284.9 284.9" style="enable-background:new 0 0 284.9 284.9; fill:#f8f9fa;"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <path
+                                                        d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
+                                                                        c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
+                                                                        l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
