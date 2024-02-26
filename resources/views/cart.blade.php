@@ -15,21 +15,21 @@
                             <div class="row">
                                 <div class="col-12 col-lg-5" style="padding-left: 20px;">
                                     <span class="cart-text">
-                                    {{$c->product}}
+                                    {{$c[0]->product->name}}
                                 </span>
                                     <div class=" d-block d-xl-none">
                                         <div class="count-cart">
-                                            <button class="btn-text count-cart-minus">-</button>
-                                            <div class="count-cart-count"><span>3</span></div>
-                                            <button onclick="countChange(this, 1)" class="btn-text count-cart-plinus">+</button>
+                                            <button class="btn-text count-cart-minus" onclick="countChange(this, {{$c[0]->product_id}}, 'minus')">-</button>
+                                            <div class="count-cart-count"><span>{{$c[0]->count}}</span></div>
+                                            <button class="btn-text count-cart-plinus" onclick="countChange(this, {{$c[0]->product_id}}, 'plinus')">+</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class=" d-none d-xl-block col-xl-3">
                                     <div class="count-cart">
-                                        <button class="btn-text count-cart-minus">-</button>
-                                        <div class="count-cart-count"><span>3</span></div>
-                                        <button class="btn-text count-cart-plinus">+</button>
+                                        <button class="btn-text count-cart-minus" onclick="countChange(this, {{$c[0]->product_id}}, 'minus')">-</button>
+                                        <div class="count-cart-count"><span>{{$c[0]->count}}</span></div>
+                                        <button class="btn-text count-cart-plinus" onclick="countChange(this, {{$c[0]->product_id}}, 'plinus')">+</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-7 col-xl-4 price-cart" style="padding-left: 20px;">
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-1 col-lg-1 checkBoxAddCart text-center">
-                            <input type="checkbox" onchange="addBuyCart(this, 1, 3)" class="checkbox-item-cart"
+                            <input type="checkbox" onchange="addBuyCart(this, {{$c[0]->product_id}}, {{$c[0]->count}})" class="checkbox-item-cart"
                                 name="checkBoxBuy">
                         </div>
 

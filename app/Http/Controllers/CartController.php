@@ -26,6 +26,25 @@ class CartController extends Controller
 
     }
     function countChangeProduct(Request $r){
+        switch ($r->znak) {
+            case 'minus':
+                $productCountChange = Cart::where("id", $r->id)->select("count")->first();
+                $productCountChange->count -= 1;
+                Cart::where("id", $r->id)->update(["count" => $productCountChange->count]);
+                return response()->json(["count" => $productCountChange->count],200);
+                break;
+                case 'plinus':
+                    $productCountChange = Cart::where("id", $r->id)->select("count")->first();
+                    $productCountChange->count += 1;
+                    Cart::where("id", $r->id)->update(["count" => $productCountChange->count]);
+                    return response()->json(["count" => $productCountChange->count],200);
+                    break;
+
+            default:
+                break;
+        }
+
+
     }
     // function cartadd()
 }

@@ -235,7 +235,7 @@ h4.product-cart-price{
 .background-textarea{
     position: relative;
     border-radius: 25px;
-    height: 100px;
+    height: 115px;
     padding-left: 25px;
     padding-right: 25px;
     margin-bottom: 10px;
@@ -284,6 +284,7 @@ h4.product-cart-price{
   .rating > label {
     color: grey;
     font-size: 30px;
+    line-height: 25px;
   }
 
   .rating > input:checked ~ label,

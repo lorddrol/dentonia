@@ -17,15 +17,14 @@ class CommentController extends Controller
         'fio' => 'required|string',
     ]);
     if($validator->fails()){
-        return response()->json($validator->errors(), 422);
+        return response()->json(["errors" => $validator->errors()], 422);
     }
     Comment::Create([
         'comment' => $r->comment,
         'star' => $r->rating,
-        'emailt' => $r->email,
+        'email' => $r->email,
         'fio' => $r->fio,
         'product_id' => $id,
-        'user_id' => Auth::user()->id,
     ]);
     return response()->json(["success" => true], 200);
     }

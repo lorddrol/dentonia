@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\controllers\CommentController;
 use App\Http\controllers\CartController;
+use Illuminate\Routing\RouteRegistrar;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,6 @@ Route::get("/cataloge", [ProductController::class, "index"])->name("cataloge");
 Route::get("/product/{id}", [ProductController::class, "viewproduct"])->name("viewproduct");
 Route::post("/commentadd/{id}", [CommentController::class, "commentadd"])->name("commentadd");
 Route::get("/cart", [CartController::class, "cartView"])->name("cartView");
-Route::post('/cart/price', [CartController::class, 'priceProduct'])->name('priceProduct');
-Route::post('/cart/countChange', [CartController::class, 'countChangeProduct'])->name('countChangeProduct');
+Route::post("/cart/price", [CartController::class, "priceProduct"])->name("priceProduct");
+Route::post("/cart/countChange", [CartController::class, "countChangeProduct"])->name("countChangeProduct");
+Route::post("/cart/delete", [CartController::class, "deleteCartProduct"])->name("countChangeProduct");

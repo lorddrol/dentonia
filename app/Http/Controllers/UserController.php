@@ -47,7 +47,7 @@ class UserController extends Controller
     }
 
     function validatorEmail($e){
-        $Validator = Validator::make($r -> all(),[
+        $Validator = Validator::make($e -> all(),[
             'email' => 'required|string',
         ]);
         if($Validator->fails()){

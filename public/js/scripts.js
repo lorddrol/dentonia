@@ -21,7 +21,7 @@ const sendingForm =(t, event) =>{
             $.each(err.responseJSON.errors, (index, value) =>{
                 console.log(value);
             $(t).find("input[name='"+ index + "'], textarea[name='" + index + "']").addClass("is-invalid");
-            $(t).find("input[name='"+ index + "']").parent().addClass("error");
+            $(t).find("input[name='"+ index + "'], textarea[name='" + index + "']").parent().addClass("error");
             $(t).find("input[name='" + index + "'] ~ span.invalid-feedback, textarea[name='" + index + "'] ~ span.invalid-feedback").text(value);
             })
         }

@@ -12,6 +12,7 @@
                             <div name="comment" class="d-block">
                                 <form action="{{ Route('commentadd', ['id' => $p->id]) }}"
                                     onsubmit="sendingForm(this, event)" method="post">
+                                    @csrf
                                     <div class="d-flex justify-content-end">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -36,33 +37,33 @@
                                     </div>
                                     @auth
                                     @if (isset(Auth::user()->fio))
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input focused">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input focused mb-4">
                                         <span class="text-plaseholder text-plaseholder-focused">ФИО</span>
                                         <input class="w-100 input" value="{{Auth::user()->fio}}" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @else
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">ФИО</span>
                                         <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endif
-                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input focused">
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input focused mb-4">
                                         <span class="text-plaseholder text-plaseholder-focused">Email</span>
                                         <input class="w-100 input" value="{{Auth::user()->email}}" name="Email" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endauth
                                     @guest
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">ФИО</span>
                                         <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
-                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">Email</span>
-                                        <input class="w-100 input" name="Email" onblur="blurInput(this)"></input>
+                                        <input class="w-100 input" name="email" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endguest
@@ -243,13 +244,13 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
-                                @if (empty($c))
+                                @if (isset($c))
 
 
                                     @foreach ($c as $ct)
                                         <div class="swiper-slide">
                                             <div class="card-comment">
-                                                <span>{{ $ct->user->fio }}</span>
+                                                <span>{{ $ct->fio }}</span>
                                                 <div class="d-flex justify-content-center mt-2 mb-2">
                                                     @for ($i = 0; $i < $ct->star; $i++)
                                                         <svg version="1.1" id="Capa_1"
@@ -271,11 +272,11 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="swiper-slide">
-                                        <div class="card-comment">
-                                            <span>Здесь ещё нету комментариев. Оставте первый!</span>
-                                        </div>
+                                <div class="swiper-slide">
+                                    <div class="card-comment">
+                                        <span>Здесь ещё нету комментариев. Оставте первый!</span>
                                     </div>
+                                </div>
                                 @endif
                             </div>
                         </div>
