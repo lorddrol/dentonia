@@ -13,7 +13,7 @@ class CartController extends Controller
     function cartView(){
         $carts = Cart::find(Auth::user()->id)->get();
         return view("cart" , [
-            "c" => $carts,
+            "carts" => $carts,
         ]);
     }
     function priceProduct(Request $r){
@@ -26,19 +26,19 @@ class CartController extends Controller
 
     }
     function countChangeProduct(Request $r){
+
+        $productCountChange = Cart::select(["id", "product_id","count"])->where("id", $r->id)->first();
         switch ($r->znak) {
             case 'minus':
-                $productCountChange = Cart::where("id", $r->id)->select("count")->first();
                 $productCountChange->count -= 1;
                 Cart::where("id", $r->id)->update(["count" => $productCountChange->count]);
-                return response()->json(["count" => $productCountChange->count],200);
+                return response()->json(["count" => $productCountChange->count, "price" => $productCountChange->product->price],200);
                 break;
-                case 'plinus':
-                    $productCountChange = Cart::where("id", $r->id)->select("count")->first();
-                    $productCountChange->count += 1;
-                    Cart::where("id", $r->id)->update(["count" => $productCountChange->count]);
-                    return response()->json(["count" => $productCountChange->count],200);
-                    break;
+            case 'plinus':
+                $productCountChange->count += 1;
+                Cart::where("id", $r->id)->update(["count" => $productCountChange->count]);
+                return response()->json(["count" => $productCountChange->count, "price" => $productCountChange->product->price],200);
+                break;
 
             default:
                 break;

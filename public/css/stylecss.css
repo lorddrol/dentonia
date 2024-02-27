@@ -53,7 +53,7 @@
 }
 #cataloge #product .product-cart-name{
     color:rgb(34, 34, 34);
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 0;
     font-weight: 500 !important;
 }
@@ -93,6 +93,8 @@ p.categories-name{
 }
 h4.product-cart-price{
     font-weight: 400;
+    font-size: 16px;
+    margin-top: 10px;
 }
 .background-input{
     position: relative;

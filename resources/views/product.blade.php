@@ -244,6 +244,7 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
+                                
                                 @if (isset($c))
 
 

@@ -5,15 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     blockButtonBuy = $('#ItogBuyCartblock');
 });
 let productBuyCount = [];
-productBuyCount.push({ "idProduct": 4, "count": 21, "price": 123 });
-productBuyCount.push({ "idProduct": 7, "count": 12, "price": 213 });
-productBuyCount.push({ "idProduct": 3, "count": 23, "price": 321 });
-productBuyCount.push({ "idProduct": 40, "count": 21, "price": 123 });
-productBuyCount.push({ "idProduct": 20, "count": 12, "price": 213 });
-productBuyCount.push({ "idProduct": 12, "count": 23, "price": 321 });
-productBuyCount.push({ "idProduct": 50, "count": 21, "price": 123 });
-productBuyCount.push({ "idProduct": 2, "count": 12, "price": 213 });
-productBuyCount.push({ "idProduct": 6, "count": 23, "price": 321 });
 const addBuyCart = (t, idProduct, count) => {
     t.disabled = true;
     if (t.checked) {
@@ -24,47 +15,77 @@ const addBuyCart = (t, idProduct, count) => {
     }
 }
 
-const countChange = (t, idProduct, znak) => {
+const countChange = (t, idProduct, znak, id) => {
     $.ajax({
         url: "/cart/countChange",
         type: "post",
         dataType: "json",
         data: {
+            id: id,
             znak: znak,
-            id: idProduct,
             _token: csrfToken,
         },
         success: function (res) {
-            console.log(res.count);
-            let divParent = $(t).parent("div.count-cart").find("div.count-cart-count span").text(res.count);
+            itog = searchProduct(idProduct);
+            console.log(itog);
+            if (itog !== -1 && idProduct == productBuyCount[itog].idProduct) {
+                switch (znak) {
+                    case 'plinus':
+                        summBuyInCart += res["price"];
+                        $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
+                        break;
+                    case 'minus':
+                        summBuyInCart -= res["price"];
+                        $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            let divParent = $(t).parent("div.count-cart").find("div.count-cart-count span").text(res["count"]);
         }
     });
 
 }
 
 
-function search(idProduct, min, max){
-    if(max-min<1)
-    {
+function search(idProduct, min, max) {
+    if (Math.abs(max - min) < 1) {
         return -1;
     }
-    res = min + (max - min)/2;
-    console.log(Math.ceil(min)+ "     " + Math.ceil(max));
-    if(productBuyCount[Math.ceil(res)].idProduct !== idProduct) {
-        if(productBuyCount[Math.ceil(res)].idProduct < idProduct){
+    res = min + (max - min) / 2;
+    if (productBuyCount[Math.round(res)].idProduct !== idProduct) {
+        if (productBuyCount[Math.round(res)].idProduct < idProduct) {
             min = res;
         } else {
             max = res;
         }
         search(idProduct, min, max);
     } else {
-        res = Math.ceil(res);
+        res = Math.round(res);
         return res;
     }
-    return res;
+}
+function searchProduct(idProduct) {
+    if (productBuyCount.length > 0) {
+        if (productBuyCount.length > 1) {
+            max = productBuyCount.length - 1;
+            res = search(idProduct, 0, max);
+            return res;
+        }
+        else {
+            return 0;
+
+        }
+    } else {
+        return -1;
+    }
+
 }
 
-function addSummBuyCart(t, idProduct, count){
+function addSummBuyCart(t, idProduct, count) {
     $.ajax({
         url: "/cart/price",
         type: "post",
@@ -82,14 +103,14 @@ function addSummBuyCart(t, idProduct, count){
             summBuyInCart += count * res.price;
             $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
             productBuyCount.push({ "idProduct": idProduct, "count": count, "price": res.price });
-            productBuyCount.sort(function (a, b) {return a.idProduct - b.idProduct;});
-            console.log(productBuyCount);
+            productBuyCount.sort(function (a, b) { return a.idProduct - b.idProduct; });
+            console.log(productBuyCount.idProduct);
             t.disabled = false;
         }
     });
 }
 
-function deliteSummBuyCart(t, idProduct, count){
+function deliteSummBuyCart(t, idProduct, count) {
     $.ajax({
         url: "/cart/price",
         type: "post",
@@ -106,17 +127,17 @@ function deliteSummBuyCart(t, idProduct, count){
             } else {
                 $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
             }
-            resultSearch = search(50, 0, productBuyCount.length-1);
-            if(resultSearch !== -1){
-            productBuyCount.splice(resultSearch,1);
-            console.log(productBuyCount);
-        }
+            resultSearch = searchProduct(idProduct);
+            if (resultSearch !== -1) {
+                productBuyCount.splice(resultSearch, 1);
+                console.log(productBuyCount);
+            }
             t.disabled = false;
         }
     });
 }
 
-function deliteProductCart(idProduct, count){
+function deliteProductCart(idProduct, count) {
     $.ajax({
         url: "/cart/price",
         type: "post",
@@ -133,8 +154,8 @@ function deliteProductCart(idProduct, count){
             } else {
                 $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
             }
-            resultSearch = search(idProduct, 0, productBuyCount.length-1);
-            productBuyCount.splice(resultSearch,1);
+            resultSearch = searchProduct(idProduct);
+            productBuyCount.splice(resultSearch, 1);
             console.log(productBuyCount);
             t.disabled = false;
         }

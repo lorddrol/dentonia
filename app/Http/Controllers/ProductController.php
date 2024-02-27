@@ -9,14 +9,16 @@ use App\Models\Comment;
 class ProductController extends Controller
 {
     function index(){
-        return view('cataloge');
+        $productCart = Product::select(["id","name","price"])->paginate(2);
+        return view('cataloge',[
+            'productCart' => $productCart]);
     }
     function viewproduct($id) {
         $product = Product::firstWhere('id',$id);
         $comment = Comment::where('product_id', $id)->get();
         return view('product',[
             'p' => $product,
-            'c' => $comment,
+            'comment' => $comment,
         ]);
     }
 }
