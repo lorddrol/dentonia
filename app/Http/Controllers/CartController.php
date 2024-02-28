@@ -11,7 +11,7 @@ use App\Models\Cart;
 class CartController extends Controller
 {
     function cartView(){
-        $carts = Cart::find(Auth::user()->id)->get();
+        $carts = Cart::where("user_id" ,Auth::user()->id)->get();
         return view("cart" , [
             "carts" => $carts,
         ]);
@@ -46,5 +46,14 @@ class CartController extends Controller
 
 
     }
-    // function cartadd()
+    function cartAdd(Request $r){
+        $cartsnowOrHave = Cart::where(["user_id"=> Auth::user()->id, "product_id" => $r->idProduct])->firstOrNew();
+        // if($cartsnowOrHave)
+        $cartsnowOrHave->user_id = Auth::user()->id;
+        $cartsnowOrHave->product_id = $r->idProduct;
+        $cartsnowOrHave->count = 1;
+        $cartsnowOrHave->save();
+        return response()->json($cartsnowOrHave->id,200);
+
+    }
 }

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     blockButtonBuy = $('#ItogBuyCartblock');
 });
 let productBuyCount = [];
+// раветвитель для чекбоксов
 const addBuyCart = (t, idProduct, count) => {
     t.disabled = true;
     if (t.checked) {
@@ -14,7 +15,7 @@ const addBuyCart = (t, idProduct, count) => {
         deliteSummBuyCart(t, idProduct, count);
     }
 }
-
+// изменение количества
 const countChange = (t, idProduct, znak, id) => {
     $.ajax({
         url: "/cart/countChange",
@@ -50,7 +51,7 @@ const countChange = (t, idProduct, znak, id) => {
 
 }
 
-
+// сам поиск ~O(log(N))
 function search(idProduct, min, max) {
     if (Math.abs(max - min) < 1) {
         return -1;
@@ -68,6 +69,7 @@ function search(idProduct, min, max) {
         return res;
     }
 }
+// прослойка перед поиска
 function searchProduct(idProduct) {
     if (productBuyCount.length > 0) {
         if (productBuyCount.length > 1) {
@@ -84,7 +86,7 @@ function searchProduct(idProduct) {
     }
 
 }
-
+// добавление в сумму
 function addSummBuyCart(t, idProduct, count) {
     $.ajax({
         url: "/cart/price",
@@ -109,7 +111,7 @@ function addSummBuyCart(t, idProduct, count) {
         }
     });
 }
-
+// вычитание из общей суммы
 function deliteSummBuyCart(t, idProduct, count) {
     $.ajax({
         url: "/cart/price",
@@ -136,7 +138,7 @@ function deliteSummBuyCart(t, idProduct, count) {
         }
     });
 }
-
+// до делать удаление из корзины
 function deliteProductCart(idProduct, count) {
     $.ajax({
         url: "/cart/price",
@@ -158,6 +160,24 @@ function deliteProductCart(idProduct, count) {
             productBuyCount.splice(resultSearch, 1);
             console.log(productBuyCount);
             t.disabled = false;
+        }
+    });
+}
+
+function addCart(t, idProduct){
+    $.ajax({
+        type:"post",
+        url:"/cart/add",
+        data: {
+            idProduct: idProduct,
+            _token: csrfToken,
+        },
+        success: function(res) {
+            console.log(t);
+            next= $(t).parent();
+            $(next).parent().append('<div class="count-cart"><button class= " btn-text count-cart-minus "onclick= "countChange(this,'+ idProduct +', "minus", '+res+')">-</button><div class="count-cart-count"><span>1</span></div><button class="btn-text count-cart-plinus"onclick="countChange(this, '+idProduct+', "plinus", '+res+')">+</button></div>');
+            next.detach();
+
         }
     });
 }

@@ -13,6 +13,6 @@ class Category extends Model
         'name',
     ];
         public function products(){
-            return $this->BelongsTo(Product::class);
+            return $this->hasOne(Product::class);
         }
 }

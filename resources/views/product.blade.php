@@ -115,11 +115,22 @@
                 <div class="col-12 col-md-6 col-lg-6 mt-4">
                     <div class="d-flex justify-content-center flex-column" style="height: 100%;">
                         <h3>{{ $p->name }}</h3>
-                        <h5 class="mt-3">{{ $p->price }}</h5>
+                        <h5 class="mt-3">{{ $p->price }} &#x20bd</h5>
+                        @if(Empty($c))
                         <div class="cartOrBuy">
-                            <button type="button" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
+                            <button type="button" onclick="addCart(this, {{$p->id}})" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
                             <button type="button" class="btn btn-lg btn-primary mt-2">купить сейчас</button>
                         </div>
+                        @else
+                            <div class="count-cart">
+                                <button class="btn-text count-cart-minus"
+                                    onclick="countChange(this, {{ $c->product_id }}, 'minus', {{$c->id}})">-</button>
+                                <div class="count-cart-count"><span>{{ $c->count }}</span></div>
+                                <button class="btn-text count-cart-plinus"
+                                    onclick="countChange(this, {{ $c->product_id }}, 'plinus', {{$c->id}})">+</button>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -244,11 +255,11 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
-                                
-                                @if (isset($c))
+
+                                @if ($comment->isEmpty())
 
 
-                                    @foreach ($c as $ct)
+                                    @foreach ($comment as $ct)
                                         <div class="swiper-slide">
                                             <div class="card-comment">
                                                 <span>{{ $ct->fio }}</span>
