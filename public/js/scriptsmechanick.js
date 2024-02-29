@@ -26,6 +26,7 @@ const countChange = (t, idProduct, znak, id) => {
             znak: znak,
             _token: csrfToken,
         },
+        
         success: function (res) {
             itog = searchProduct(idProduct);
             console.log(itog);
