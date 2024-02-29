@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-1 col-lg-1 checkBoxAddCart text-center">
                                 <input type="checkbox"
-                                    onchange="addBuyCart(this, {{ $c->product_id }}, {{ $c->count }})"
+                                    onchange="editSummBuyCartUi(this, {{ $c->product_id }}, {{ $c->count }})"
                                     class="checkbox-item-cart" name="checkBoxBuy">
                             </div>
                         </div>

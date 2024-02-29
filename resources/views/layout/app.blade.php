@@ -187,6 +187,7 @@
 
     <script src="{{ asset('public/js/scripts.js') }}"></script>
     <script src="{{asset('public/js/scriptsmechanick.js')}}"></script>
+    <script src="{{asset('public/js/ui.js')}}"></script>
 </body>
 
 </html>

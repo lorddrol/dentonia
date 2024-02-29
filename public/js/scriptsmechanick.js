@@ -6,15 +6,38 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 let productBuyCount = [];
 // раветвитель для чекбоксов
-const addBuyCart = (t, idProduct, count) => {
-    t.disabled = true;
-    if (t.checked) {
-        addSummBuyCart(t, idProduct, count);
-
-    } else {
-        deliteSummBuyCart(t, idProduct, count);
-    }
+function editSummBuyCartRep (idProduct) {
+    $.ajax({
+        url: "/cart/price",
+        type: "post",
+        dataType: "json",
+        async:false,
+        data: {
+            id: idProduct,
+            _token: csrfToken,
+        },
+        success: function (res) {
+            callback(res);
+        }
+    });
 }
+function editSummBuyCartBisnes(t, idProduct,count) {
+    res = editSummBuyCartRep(idProduct);
+    console.log(res);
+    if (t.checked) {
+        summBuyInCart += count * res.price;
+        productBuyCount.push({ "idProduct": idProduct, "count": count, "price": res["price"] });
+        productBuyCount.sort(function (a, b) { return a.idProduct - b.idProduct; });
+    } else {
+        summBuyInCart -= count * res.price;
+        resultSearch = searchProduct(idProduct);
+        if (resultSearch !== -1) {
+            productBuyCount.splice(resultSearch, 1);
+        }
+    }
+
+}
+
 // изменение количества
 const countChange = (t, idProduct, znak, id) => {
     $.ajax({
@@ -26,7 +49,7 @@ const countChange = (t, idProduct, znak, id) => {
             znak: znak,
             _token: csrfToken,
         },
-        
+
         success: function (res) {
             itog = searchProduct(idProduct);
             console.log(itog);
@@ -34,11 +57,9 @@ const countChange = (t, idProduct, znak, id) => {
                 switch (znak) {
                     case 'plinus':
                         summBuyInCart += res["price"];
-                        $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
                         break;
                     case 'minus':
                         summBuyInCart -= res["price"];
-                        $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
 
                         break;
 
@@ -46,6 +67,7 @@ const countChange = (t, idProduct, znak, id) => {
                         break;
                 }
             }
+            $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
             let divParent = $(t).parent("div.count-cart").find("div.count-cart-count span").text(res["count"]);
         }
     });
@@ -87,98 +109,17 @@ function searchProduct(idProduct) {
     }
 
 }
-// добавление в сумму
-function addSummBuyCart(t, idProduct, count) {
-    $.ajax({
-        url: "/cart/price",
-        type: "post",
-        dataType: "json",
-        data: {
-            id: idProduct,
-            _token: csrfToken,
-        },
-        success: function (res) {
-            if (summBuyInCart == 0) {
-                // вынести в отдельный блок
-                $(blockButtonBuy).find("button.btn").addClass("btn-primary").removeClass("btn-secondary");
-                $(blockButtonBuy).find("span.priceText").text("");
-            }
-            summBuyInCart += count * res.price;
-            $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
-            productBuyCount.push({ "idProduct": idProduct, "count": count, "price": res.price });
-            productBuyCount.sort(function (a, b) { return a.idProduct - b.idProduct; });
-            console.log(productBuyCount.idProduct);
-            t.disabled = false;
-        }
-    });
-}
-// вычитание из общей суммы
-function deliteSummBuyCart(t, idProduct, count) {
-    $.ajax({
-        url: "/cart/price",
-        type: "post",
-        dataType: "json",
-        data: {
-            id: idProduct,
-            _token: csrfToken,
-        },
-        success: function (res) {
-            summBuyInCart -= count * res.price;
-            if (summBuyInCart == 0) {
-                $(blockButtonBuy).find("button.btn").removeClass("btn-primary").addClass("btn-secondary");
-                $(blockButtonBuy).find("span.priceText").text("");
-            } else {
-                $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
-            }
-            resultSearch = searchProduct(idProduct);
-            if (resultSearch !== -1) {
-                productBuyCount.splice(resultSearch, 1);
-                console.log(productBuyCount);
-            }
-            t.disabled = false;
-        }
-    });
-}
-// до делать удаление из корзины
-function deliteProductCart(idProduct, count) {
-    $.ajax({
-        url: "/cart/price",
-        type: "post",
-        dataType: "json",
-        data: {
-            id: idProduct,
-            _token: csrfToken,
-        },
-        success: function (res) {
-            summBuyInCart -= count * res.price;
-            if (summBuyInCart == 0) {
-                $(blockButtonBuy).find("button.btn").removeClass("btn-primary").addClass("btn-secondary");
-                $(blockButtonBuy).find("span.priceText").text("");
-            } else {
-                $(blockButtonBuy).find("span.priceText").text(summBuyInCart);
-            }
-            resultSearch = searchProduct(idProduct);
-            productBuyCount.splice(resultSearch, 1);
-            console.log(productBuyCount);
-            t.disabled = false;
-        }
-    });
-}
 
-function addCart(t, idProduct){
+function addCart(t, idProduct) {
     $.ajax({
-        type:"post",
-        url:"/cart/add",
+        type: "post",
+        url: "/cart/add",
         data: {
             idProduct: idProduct,
             _token: csrfToken,
         },
-        success: function(res) {
-            console.log(t);
-            next= $(t).parent();
-            $(next).parent().append('<div class="count-cart"><button class= " btn-text count-cart-minus "onclick= "countChange(this,'+ idProduct +', "minus", '+res+')">-</button><div class="count-cart-count"><span>1</span></div><button class="btn-text count-cart-plinus"onclick="countChange(this, '+idProduct+', "plinus", '+res+')">+</button></div>');
-            next.detach();
-
+        success: function (res) {
+            addCartUi(res);
         }
     });
 }
