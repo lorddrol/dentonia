@@ -11,6 +11,7 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        ''
     ];
         public function products(){
             return $this->BelongsTo(Product::class);

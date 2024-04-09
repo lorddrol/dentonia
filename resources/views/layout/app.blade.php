@@ -124,7 +124,7 @@
     </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="{{route("home")}}">Navbar</a>
+            <a class="navbar-brand text-primary" href="{{route("home")}}">Дентония</a>
             <div class="w-75 d-block d-lg-none">
                 <form class="d-flex " role="search">
                     <input class="form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search">
