@@ -14,14 +14,10 @@ class Comment extends Model
         'comment',
         'star',
         'fio',
-        'email',
         'user_id',
         'product_id',
     ];
     public function product(){
         return $this->belongsTo(Product::class);
-    }
-    public function users(){
-        return $this->belongsTo(User::class);
     }
 }

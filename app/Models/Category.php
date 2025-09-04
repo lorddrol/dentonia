@@ -11,8 +11,10 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        'categories_id',
+        'have_under_category',
     ];
         public function products(){
-            return $this->BelongsTo(Product::class);
+            return $this->hasOne(Product::class);
         }
 }

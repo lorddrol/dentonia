@@ -18,19 +18,17 @@ class Product extends Model
         'structure',
         'application',
         'advantages',
-        'price',
-        'category_id'
+        'price_user',
+        'price_doctor',
+        'category_id',
     ];
     public function category(){
         return $this->belongsTo(Category::class);
-    }
-    public function comments(){
-        return $this->HasOne(Comment::class);
     }
     public function photo(){
         return $this->belongsTo(Photo::class);
     }
     public function carts(){
-        return $this->belongsTo(Cart::class);
+        return $this->hasMany(Cart::class);
     }
 }

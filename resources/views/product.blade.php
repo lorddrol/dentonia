@@ -12,6 +12,7 @@
                             <div name="comment" class="d-block">
                                 <form action="{{ Route('commentadd', ['id' => $p->id]) }}"
                                     onsubmit="sendingForm(this, event)" method="post">
+                                    @csrf
                                     <div class="d-flex justify-content-end">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -36,33 +37,33 @@
                                     </div>
                                     @auth
                                     @if (isset(Auth::user()->fio))
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input focused">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input focused mb-4">
                                         <span class="text-plaseholder text-plaseholder-focused">ФИО</span>
                                         <input class="w-100 input" value="{{Auth::user()->fio}}" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @else
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">ФИО</span>
                                         <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endif
-                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input focused">
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input focused mb-4">
                                         <span class="text-plaseholder text-plaseholder-focused">Email</span>
                                         <input class="w-100 input" value="{{Auth::user()->email}}" name="Email" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endauth
                                     @guest
-                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="fioParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">ФИО</span>
                                         <input class="w-100 input" name="fio" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
-                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input default">
+                                    <div name="EmailParent" onclick="focusInput(this)" class="background-input default mb-4">
                                         <span class="text-plaseholder text-plaseholder-default">Email</span>
-                                        <input class="w-100 input" name="Email" onblur="blurInput(this)"></input>
+                                        <input class="w-100 input" name="email" onblur="blurInput(this)"></input>
                                         <span class="invalid-feedback"></span>
                                     </div>
                                     @endguest
@@ -114,11 +115,22 @@
                 <div class="col-12 col-md-6 col-lg-6 mt-4">
                     <div class="d-flex justify-content-center flex-column" style="height: 100%;">
                         <h3>{{ $p->name }}</h3>
-                        <h5 class="mt-3">{{ $p->price }}</h5>
+                        <h5 class="mt-3">{{ $p->price }} &#x20bd</h5>
+                        @if(Empty($c))
                         <div class="cartOrBuy">
-                            <button type="button" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
+                            <button type="button" onclick="addCart(this, {{$p->id}})" class="btn btn-lg btn-outline-primary mt-2 me-2">В корзину</button>
                             <button type="button" class="btn btn-lg btn-primary mt-2">купить сейчас</button>
                         </div>
+                        @else
+                            <div class="count-cart">
+                                <button class="btn-text count-cart-minus"
+                                    onclick="countChange(this, {{ $c->product_id }}, 'minus', {{$c->id}})">-</button>
+                                <div class="count-cart-count"><span>{{ $c->count }}</span></div>
+                                <button class="btn-text count-cart-plinus"
+                                    onclick="countChange(this, {{ $c->product_id }}, 'plinus', {{$c->id}})">+</button>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -218,10 +230,7 @@
                                         viewBox="0 0 284.9 284.9" style="enable-background:new 0 0 284.9 284.9;"
                                         xml:space="preserve">
                                         <g>
-                                            <path
-                                                d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9
-                                                                    c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9
-                                                                    l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
+                                            <path d="M282.1,76.5l-14.3-14.3c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L142.5,174.4L30.3,62.2c-1.9-1.9-4.1-2.9-6.6-2.9c-2.5,0-4.7,1-6.6,2.9L2.9,76.5C0.9,78.4,0,80.6,0,83.1c0,2.5,1,4.7,2.9,6.6l133,133c1.9,1.9,4.1,2.9,6.6,2.9s4.7-1,6.6-2.9l133.1-133c1.9-1.9,2.8-4.1,2.8-6.6C284.9,80.6,284,78.4,282.1,76.5z" />
                                         </g>
                                     </svg>
 
@@ -243,13 +252,14 @@
                     <div class="slider-comment">
                         <div class="swiper mySwiper2">
                             <div class="swiper-wrapper">
-                                @if (empty($c))
+
+                                @if ($comment->isEmpty())
 
 
-                                    @foreach ($c as $ct)
+                                    @foreach ($comment as $ct)
                                         <div class="swiper-slide">
                                             <div class="card-comment">
-                                                <span>{{ $ct->user->fio }}</span>
+                                                <span>{{ $ct->fio }}</span>
                                                 <div class="d-flex justify-content-center mt-2 mb-2">
                                                     @for ($i = 0; $i < $ct->star; $i++)
                                                         <svg version="1.1" id="Capa_1"
@@ -271,11 +281,11 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="swiper-slide">
-                                        <div class="card-comment">
-                                            <span>Здесь ещё нету комментариев. Оставте первый!</span>
-                                        </div>
+                                <div class="swiper-slide">
+                                    <div class="card-comment">
+                                        <span>Здесь ещё нету комментариев. Оставте первый!</span>
                                     </div>
+                                </div>
                                 @endif
                             </div>
                         </div>

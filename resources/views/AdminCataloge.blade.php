@@ -1,13 +1,38 @@
-@extends('layout.app')
-@section('title', 'Каталог')
+@extends('layout.admin')
+
+@section('title', 'каталог админ')
+
 @section('content')
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Вы точно хотите удалить товар?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ route('admin.deleteProduct') }}" method="post">
+                        @csrf
+                        <input name="id" id="inputDeleteId" value="-1" class="d-none">
+                        <button type="submit" id="delteProduct" class="btn btn-danger">Удалить</button>
+                    </form>
+                    <button type="button" value="" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section id="cataloge">
         <div class="container">
-            <h1 class="title-list">Каталог</h1>
-
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1 class="title-list">Каталог</h1>
+                </div>
+                <div><a href="{{ route('admin.viewCreateProduct') }}" class="btn btn-primary">создать</a></div>
+            </div>
             <section id="product">
                 <div class="row">
-                    <div class="col-12 col-lg-3 pe-3">
+                    <div class="col-12 col-lg-3">
                         <form action="">
                             <div id="allCategory">
                                 <div class="d-flex justify-content-between categories-name">
@@ -15,15 +40,9 @@
                                         <p>Все категории</p>
                                     </div>
                                     <div>
-                                        <button type="button" id="open_under_categoryallCategories"
-                                            onclick="openUnderCategory('allCategories')"
-                                            class="open_under_category" style="width: 25px;">+</button>
-                                        <button type="button" style="width: 25px;" id="hiden_under_categoryallCategories"
-                                            onclick="hidenUnderCategory('allCategories')"
-                                            class="open_under_category d-none">-</button>
+                                        <p>+</p>
                                     </div>
                                 </div>
-                                <div id="allCategories">
                                 @foreach ($category as $c)
                                     @if ($c->categories_id == null)
                                         <div class="d-flex justify-content-between">
@@ -35,10 +54,10 @@
                                             @if ($c->have_under_category == true)
                                                 <button type="button" id="open_under_category{{ $c->id }}"
                                                     onclick="openUnderCategory({{ $c->id }})"
-                                                    class="open_under_category" style="width: 25px;">+</button>
+                                                    class="open_under_category">+</button>
                                                 <button type="button" id="hiden_under_category{{ $c->id }}"
                                                     onclick="hidenUnderCategory({{ $c->id }})"
-                                                    class="open_under_category d-none" style="width: 25px;">-</button>
+                                                    class="open_under_category d-none">-</button>
                                         </div>
                                         <div id="{{ $c->id }}"class="underCategory d-none">
                                             @foreach ($category as $c1)
@@ -56,26 +75,21 @@
                             </div>
                             @endif
                             @endif
-                            @endforeach</div>
+                            @endforeach
                     </div>
-                    <p class="categories-name">Все категории</p>
-                    <ul>
-                        <li><input type="checkbox" name="" id=""><label for=""></label><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                            </svg></li>
-                    </ul>
                     </form>
                 </div>
                 <div class="col-12 col-lg-9">
                     <div id="products">
-                        @include('patern.products', ['products' => $products])
+                        @include('patern.Adminproducts', ['products' => $products])
                     </div>
                 </div>
         </div>
     </section>
     </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('public/js/admin.js') }}"></script>
 @endsection

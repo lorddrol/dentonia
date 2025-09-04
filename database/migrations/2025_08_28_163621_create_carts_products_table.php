@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('carts_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('fio');
-            $table->string("comment");
-            $table->foreignId("product_id")->constrained()->cascadeOnDelete();
-            $table->integer("star");
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('carts_products');
     }
 };
