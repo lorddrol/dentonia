@@ -123,3 +123,19 @@ function addCart(t, idProduct) {
         }
     });
 }
+
+function showProduct(id){
+    console.log(id);
+    $.ajax({
+        type: "get",
+        url: "/cataloge/filter",
+        data: {
+            category_id: id,
+            _token: csrfToken,
+        },
+        success: function(res){
+            console.log(1432);
+            $("#products").html(res);
+        }
+    });
+    }

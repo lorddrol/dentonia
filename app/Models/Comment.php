@@ -14,7 +14,6 @@ class Comment extends Model
         'comment',
         'star',
         'fio',
-        'email',
         'user_id',
         'product_id',
     ];

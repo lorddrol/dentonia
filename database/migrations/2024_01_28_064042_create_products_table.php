@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('application', 1000);
             $table->string('advantages', 1000);
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->integer('price');
+            $table->integer('price_user');
+            $table->integer('price_doctor');
             $table->timestamps();
         });
     }

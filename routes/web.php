@@ -5,9 +5,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCataloge;
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\controllers\CommentController;
 use App\Http\controllers\CartController;
+use App\Http\Controllers\catalogController;
 use Illuminate\Routing\RouteRegistrar;
+use App\Http\Controllers\AdminProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +39,16 @@ Route::middleware(["auth"])->group(function () {
     Route::post("/cart/delete", [CartController::class, "deleteCartProduct"])->name("countChangeProduct");
     Route::post("/cart/add", [CartController::class, "cartAdd"])->name("addCart");
 });
-
-Route::get("/cataloge", [ProductController::class, "index"])->name("cataloge");
+Route::get("/admin/viewCategory", [AdminCategoryController::class, "viewCategory"])->name("admin.viewCategory");
+Route::post("/admin/viewCategory", [AdminCategoryController::class, "createCategory"])->name("admin.createCategory");
+Route::post("/admin/viewCategory", [AdminCategoryController::class, "editCategory"])->name("admin.editCategory");
+Route::get("/admin/createProduct", [AdminProduct::class, "viewCreateProduct"])->name("admin.viewCreateProduct");
+Route::post("/admin/createProduct", [AdminProduct::class, "createProduct"])->name("admin.createProduct");
+Route::post("/admin/deliteProduct", [AdminProduct::class, "deleteProduct"])->name("admin.deleteProduct");
+Route::post("/admin/editProduct", [AdminProduct::class, "UpdateProduct"])->name("admin.editproduct");
+Route::get("/admin/product/{id}", [AdminProduct::class, "viewproduct"])->name("admin.viewproduct");
+Route::get("/admin/cataloge", [AdminProduct::class, "view"])->name("admin.cataloge");
+Route::get('/cataloge/filter', [ProductController::class, 'filter']);
+Route::get("/cataloge", [catalogController::class, "view"])->name("cataloge");
 Route::get("/product/{id}", [ProductController::class, "viewproduct"])->name("viewproduct");
 Route::post("/commentadd/{id}", [CommentController::class, "commentadd"])->name("commentadd");

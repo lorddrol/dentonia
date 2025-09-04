@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user_admins', function (Blueprint $table) {
             $table->id();
             $table->string('fio')->nullable();
             $table->string('email')->unique();
@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->string('numberPhone')->nullable();
             $table->string('adress')->nullable();
-            $table->boolean('is_doctor')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_admins');
     }
 };

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->integer('count');
-            $table->integer('number_order');
+            $table->integer("total_price");
+            $table->string("adres")->default("магазин");
+
             $table->timestamps();
         });
     }
