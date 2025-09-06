@@ -17,7 +17,7 @@ class AdminCategoryController extends Controller
         $category->name = $r->name;
         $category->categories_id = $r->categories_id;
         $category->save();
-        return redirect()->route('viewCategory');
+        return redirect()->route('admin.viewCategory');
     }
 
     function editCategory(Request $r){
@@ -25,6 +25,16 @@ class AdminCategoryController extends Controller
         $category->name = $r->name;
         $category->categories_id = $r->categories_id;
         $category->save();
-        return redirect()->route('viewCategory');
+        return redirect()->route('admin.viewCategory');
+    }
+    function viewEditCategory(Request $r){
+        $category = Category::where('id', $r->id)->first();
+        //$categories =
+    }
+    function deleteCategory(Request $r){
+        dd($r);
+        $category = Category::where('id', $r->id)->first();
+        $category->delete();
+        return redirect()->route('admin.viewCategory');
     }
 }

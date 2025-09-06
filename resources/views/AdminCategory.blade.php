@@ -11,7 +11,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <div id="editCategoryForm">
+                    <form method="post" action="{{ route("admin.editCategory") }}">
                         @csrf
                         <input type="text" id="editCategoryId" name="id" class="d-none">
                         <label for="name">Название категория</label>
@@ -20,18 +21,18 @@
                             aria-placeholder="Выберите Родительскую категорию">
                             @foreach ($category as $c)
                                 @if ($c->categories_id == null)
-                                    <option id="{{$c->id}}" value="{{ $c->id }}">{{ $c->name }}</option>
+                                    <option id="{{ $c->id }}" value="{{ $c->id }}">{{ $c->name }}
+                                    </option>
                                 @else
                                 @endif
                             @endforeach
                         </select>
-                        <button class="btn btn-success mt-3">создать</button>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                    <button class="btn btn-primary">Сохранить изменения</button>
                 </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -43,11 +44,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-footer">
-                    <form action="">
+                    <div id="editCategoryForm">
+                    <form action="{{ route('admin.deleteCategory') }}" method="post">
                         @csrf
-                        <input type="text" id="id" name="id">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">удалить</button></form>
+                        <input style="d-none" type="text" id="id" name="id">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button class="btn btn-primary">удалить</button>
+                    </form></div>
                 </div>
             </div>
         </div>
@@ -77,11 +80,14 @@
                                                     onclick="hidenUnderCategory({{ $c->id }})"
                                                     class="open_under_category d-none">-</button>
                                             </div>
-                                            <button type="button" onclick="editCategory($c->id, $c->name, $c->categories_id)" data-bs-toggle="modal" data-bs-target="#editCategory"
+                                            <button type="button"
+                                                onclick="editCategory({{ $c->id }}, {{ $c->name }}, {{ $c->categories_id }})"
+                                                data-bs-toggle="modal" data-bs-target="#editCategory"
                                                 style="width:40px;hieght:20px; padding: 5px" class="btn btn-success"><img
-                                                    style="width:20px;hieght:20px;" src="{{ asset('public/img/edit.svg') }}"
-                                                    alt=""></button>
-                                            <button type="button" onclick="deleteCategory($c->id)" data-bs-toggle="modal" data-bs-target="#deleteCategory"
+                                                    style="width:20px;hieght:20px;"
+                                                    src="{{ asset('public/img/edit.svg') }}" alt=""></button>
+                                            <button type="button" onclick="deleteCategory({{ $c->id }})"
+                                                data-bs-toggle="modal" data-bs-target="#deleteCategory"
                                                 style="width:40px;hieght:20px; padding: 5px;" class="btn btn-danger"><img
                                                     style="width:20px;hieght:20px;"
                                                     src="{{ asset('public/img/clouse.svg') }}" alt=""></button>
@@ -98,14 +104,15 @@
                                                     <label for="{{ $c1->id }}">{{ $c1->name }}</label>
                                                 </div>
                                                 <div>
-                                                    <button type="button" onclick="editCategory($c1->id, $c1->name, $c1->categories_id)" data-bs-toggle="modal"
-                                                        data-bs-target="#editCategory"
+                                                    <button type="button"
+                                                        onclick="editCategory({{ $c1->id }}, {{ $c1->name }}, {{ $c1->categories_id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#editCategory"
                                                         style="width:40px;hieght:20px; padding: 5px"
                                                         class="btn btn-success"><img style="width:20px;hieght:20px;"
                                                             src="{{ asset('public/img/edit.svg') }}"
                                                             alt=""></button>
-                                                    <button type="button" onclick="deleteCategory($c1->id)" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteCategory"
+                                                    <button type="button" onclick="deleteCategory({{ $c1->id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteCategory"
                                                         style="width:40px;hieght:20px; padding: 5px;"
                                                         class="btn btn-danger"><img style="width:20px;hieght:20px;"
                                                             src="{{ asset('public/img/clouse.svg') }}"
@@ -118,11 +125,14 @@
                                 </div>
                             @else
                                 <div>
-                                    <button type="button" onclick="editCategory($c->id, $c->name, $c->categories_id)" data-bs-toggle="modal" data-bs-target="#editCategory"
+                                    <button type="button"
+                                        onclick="editCategory({{ $c->id }}, {{ $c->name }}, {{ $c->categories_id }})"
+                                        data-bs-toggle="modal" data-bs-target="#editCategory"
                                         style="width:40px;hieght:20px; padding: 5px" class="btn btn-success"><img
                                             style="width:20px;hieght:20px;" src="{{ asset('public/img/edit.svg') }}"
                                             alt=""></button>
-                                    <button type="button" onclick="deleteCategory($c->id)" data-bs-toggle="modal" data-bs-target="#deleteCategory"
+                                    <button type="button" onclick="deleteCategory({{ $c->id }})"
+                                        data-bs-toggle="modal" data-bs-target="#deleteCategory"
                                         style="width:40px;hieght:20px; padding: 5px;" class="btn btn-danger"><img
                                             style="width:20px;hieght:20px;" src="{{ asset('public/img/clouse.svg') }}"
                                             alt=""></button>
@@ -154,4 +164,9 @@
         </div>
     </div>
     </div>
+@endsection
+
+
+@section('scripts')
+    <script src="{{ asset('public/js/admin.js') }}"></script>
 @endsection

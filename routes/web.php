@@ -40,8 +40,9 @@ Route::middleware(["auth"])->group(function () {
     Route::post("/cart/add", [CartController::class, "cartAdd"])->name("addCart");
 });
 Route::get("/admin/viewCategory", [AdminCategoryController::class, "viewCategory"])->name("admin.viewCategory");
-Route::post("/admin/viewCategory", [AdminCategoryController::class, "createCategory"])->name("admin.createCategory");
-Route::post("/admin/viewCategory", [AdminCategoryController::class, "editCategory"])->name("admin.editCategory");
+Route::post("/admin/createCategory", [AdminCategoryController::class, "createCategory"])->name("admin.createCategory");
+Route::post("/admin/editCategory", [AdminCategoryController::class, "editCategory"])->name("admin.editCategory");
+Route::post("/admin/deleteCategory", [AdminCategoryController::class, "deleteCategory"])->name("admin.deleteCategory");
 Route::get("/admin/createProduct", [AdminProduct::class, "viewCreateProduct"])->name("admin.viewCreateProduct");
 Route::post("/admin/createProduct", [AdminProduct::class, "createProduct"])->name("admin.createProduct");
 Route::post("/admin/deliteProduct", [AdminProduct::class, "deleteProduct"])->name("admin.deleteProduct");

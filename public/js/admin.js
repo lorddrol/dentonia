@@ -1,6 +1,6 @@
 var deleteId = document.getElementById("inputDeleteId");
 var editCategory = document.getElementById("editCategory");
-var deleteCategory = document.getElementById("deleteCategory");
+var deleteCategory = document.("div#deleteCategory");
 
 const valDeleteProduct = (id) => {
     console.log(deleteId);
@@ -14,5 +14,6 @@ const editCategory = (id, name, mouthcategory) => {
 }
 
 const deleteCategory = (id) =>{
-    $(deleteCategory).val(id);
+    console.log($(deleteCategory).find("input#id"));
+    $(deleteCategory).find("input#id").val(id);
 }
